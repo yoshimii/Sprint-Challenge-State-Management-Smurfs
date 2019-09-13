@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { getSmurfs } from '../actions';
+import { getSmurfs, postSmurfs } from '../actions';
 
 
 const Smurfs = ({ getSmurfs, smurf}) => {
+    const [ newSmurf, setSmurf ] = useState('');
+
     useEffect(() => {
         getSmurfs();
     }, [getSmurfs]);
@@ -12,10 +14,30 @@ const Smurfs = ({ getSmurfs, smurf}) => {
     //     return <h6>Fetching smurfs!</h6>;
     // }
 
+    const handleChanges = e => {
+        e.preventDefault();
+        setSmurf(e.target.value);
+    }
+
+    console.log(postSmurfs)
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        getSmurfs(smurf);
+        setSmurf('');
+        console.log(smurf)
+        console.log(newSmurf)
+    }
     return (
         <div>
-           <input type='text'></input>
+            <form onSubmit={handleSubmit}>
+           <input type='text'
+            name='newsmurf'
+            placeholder='Enter a name'
+            onChange={handleChanges}
+            value={newSmurf}></input>
             <button onClick={getSmurfs}>Add new smurf.</button>
+            </form>
         </div>
     )
 }

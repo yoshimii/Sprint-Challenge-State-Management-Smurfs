@@ -1,4 +1,4 @@
-import { FETCHING_SMURF, FETCHED_SMURF, FETCH_SMURF_FAIL } from '../actions';
+import { FETCHING_SMURF, FETCHED_SMURF, FETCH_SMURF_FAIL, POSTING_SMURF } from '../actions';
 
 const initialState = [
     {
@@ -15,12 +15,15 @@ export const reducer = (state = initialState, action) => {
                 ...state
             }
 
-        // case FETCHED_BEER:
-        //     return {
-        //         ...state,
-        //         isFetching:false,
-        //         beer: action.payload
-        //     }
+        case FETCHED_SMURF:
+            return {
+                ...state
+            }
+
+            case POSTING_SMURF:
+            return {
+                ...state
+            }
         // case FETCH_BEER_FAIL:
         //     return {
         //         ...state,
