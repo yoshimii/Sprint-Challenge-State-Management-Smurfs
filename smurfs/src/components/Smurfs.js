@@ -14,15 +14,15 @@ const Smurfs = ({ getSmurfs, smurf}) => {
 
     return (
         <div>
-           
-            <button onClick={getSmurf}>Get New Quote</button>
+           <input type='text'></input>
+            <button onClick={getSmurfs}>Add new smurf.</button>
         </div>
     )
 }
 
 const mapStateToProps = state => {
     return {
-        state = state
+        state: state
     }
 }
 
