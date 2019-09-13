@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { getSmurfs, postSmurfs } from '../actions';
 
-
-const Smurfs = ({ getSmurfs, smurf}) => {
-    const [ newSmurf, setSmurf ] = useState('');
+const Smurfs = ({ getSmurfs, smurfs, postSmurfs}) => {
+    const [ newSmurf, setSmurf ] = useState();
 
     useEffect(() => {
         getSmurfs();
@@ -14,18 +13,28 @@ const Smurfs = ({ getSmurfs, smurf}) => {
     //     return <h6>Fetching smurfs!</h6>;
     // }
 
+
+
     const handleChanges = e => {
         e.preventDefault();
         setSmurf(e.target.value);
     }
 
-    console.log(postSmurfs)
+    const newSmurfObj = {
+        name: newSmurf,
+        age: 0,
+        height: 0,
+        id: 0
+    }
+
+    console.log(newSmurfObj)
+
+    console.log(smurfs)
 
     const handleSubmit = e => {
         e.preventDefault();
-        getSmurfs(smurf);
+        postSmurfs(newSmurfObj);
         setSmurf('');
-        console.log(smurf)
         console.log(newSmurf)
     }
     return (
@@ -38,17 +47,20 @@ const Smurfs = ({ getSmurfs, smurf}) => {
             value={newSmurf}></input>
             <button onClick={getSmurfs}>Add new smurf.</button>
             </form>
+            {smurfs.map(smurf => {
+               return <p>{smurf.name}</p>
+            })}
         </div>
     )
 }
 
 const mapStateToProps = state => {
     return {
-        state: state
+        smurfs: state.smurfs
     }
 }
 
 export default connect(
     mapStateToProps,
-    { getSmurfs }
+    { getSmurfs, postSmurfs }
 )(Smurfs);

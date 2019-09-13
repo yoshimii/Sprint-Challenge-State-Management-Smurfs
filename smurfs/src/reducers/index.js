@@ -1,18 +1,21 @@
-import { FETCHING_SMURF, FETCHED_SMURF, FETCH_SMURF_FAIL, POSTING_SMURF } from '../actions';
+import { FETCHING_SMURF, FETCHED_SMURF, FETCH_SMURF_FAIL, POSTING_SMURF, ADD_SMURF } from '../actions';
 
-const initialState = [
+const initialState = {
+  smurfs:   [
     {
       name: "Brainey",
       age: 200,
       height: "5cm",
       id: 0
     }
-  ];
+  ]
+}
 export const reducer = (state = initialState, action) => {
     switch(action.type) {
         case FETCHING_SMURF:
             return {
-                ...state
+                ...state, 
+                
             }
 
         case FETCHED_SMURF:
@@ -21,14 +24,17 @@ export const reducer = (state = initialState, action) => {
             }
 
             case POSTING_SMURF:
-            return {
-                ...state
-            }
-        // case FETCH_BEER_FAIL:
-        //     return {
-        //         ...state,
 
-        //     }
+              return {
+                ...state
+            };
+            
+        case ADD_SMURF:
+            return {
+      
+                ...state, smurfs: [...state.smurfs, {name: action.payload, age: '', height:'', id: '' }]
+
+            }
         
             default: return state;
     }
