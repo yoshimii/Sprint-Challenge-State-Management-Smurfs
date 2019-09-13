@@ -3,21 +3,16 @@ import { connect } from 'react-redux';
 import { getSmurfs, postSmurfs } from '../actions';
 
 const Smurfs = ({ getSmurfs, smurfs, postSmurfs}) => {
-    const [ newSmurf, setSmurf ] = useState();
+    const [ newSmurf, setSmurf ] = useState(smurfs.name);
 
     useEffect(() => {
         getSmurfs();
     }, [getSmurfs]);
     
-    // if (isFetching) {
-    //     return <h6>Fetching smurfs!</h6>;
-    // }
-
-
-
     const handleChanges = e => {
         e.preventDefault();
         setSmurf(e.target.value);
+        console.log(newSmurf)
     }
 
     const newSmurfObj = {
@@ -33,9 +28,9 @@ const Smurfs = ({ getSmurfs, smurfs, postSmurfs}) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        postSmurfs(newSmurfObj);
+        postSmurfs({newSmurfObj});
+        console.log(newSmurfObj)
         setSmurf('');
-        console.log(newSmurf)
     }
     return (
         <div>
